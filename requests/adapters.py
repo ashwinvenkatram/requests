@@ -11,6 +11,8 @@ and maintain connections.
 import os.path
 import socket
 
+from tcp.tcp_keep_alive_probes import TCPKeepAlivePoolManager, TCPKeepAliveProxyManager
+
 from urllib3.poolmanager import PoolManager, proxy_from_url
 from urllib3.response import HTTPResponse
 from urllib3.util import parse_url
@@ -160,8 +162,11 @@ class HTTPAdapter(BaseAdapter):
         self._pool_maxsize = maxsize
         self._pool_block = block
 
-        self.poolmanager = PoolManager(num_pools=connections, maxsize=maxsize,
-                                       block=block, strict=True, **pool_kwargs)
+        # self.poolmanager = PoolManager(num_pools=connections, maxsize=maxsize,
+        #                                block=block, strict=True, **pool_kwargs)
+
+        self.poolmanager = TCPKeepAlivePoolManager(num_pools=connections, maxsize=maxsize,
+                                   block=block, strict=True, **pool_kwargs)
 
     def proxy_manager_for(self, proxy, **proxy_kwargs):
         """Return urllib3 ProxyManager for the given proxy.
@@ -175,6 +180,7 @@ class HTTPAdapter(BaseAdapter):
         :returns: ProxyManager
         :rtype: urllib3.ProxyManager
         """
+        print("Ashwin: Triggered proxy_manager_for; may need TCPKeepAliveProxyManager")
         if proxy in self.proxy_manager:
             manager = self.proxy_manager[proxy]
         elif proxy.lower().startswith('socks'):
