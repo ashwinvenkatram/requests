@@ -469,7 +469,7 @@ class TestRequests:
     @pytest.mark.parametrize('key', ('User-agent', 'user-agent'))
     def test_user_agent_transfers(self, httpbin, key):
 
-        heads = {key: 'Mozilla/5.0 (github.com/psf/requests)'}
+        heads = {key: 'Mozilla/5.0 (github.com/psf/client_requests)'}
 
         r = requests.get(httpbin('user-agent'), headers=heads)
         assert heads[key] in r.text
@@ -875,7 +875,7 @@ class TestRequests:
         assert r.status_code == 200
 
     def test_https_warnings(self, httpbin_secure, httpbin_ca_bundle):
-        """warnings are emitted with requests.get"""
+        """warnings are emitted with client_requests.get"""
         if HAS_MODERN_SSL or HAS_PYOPENSSL:
             warnings_expected = ('SubjectAltNameWarning', )
         else:
@@ -1931,7 +1931,7 @@ class TestRequests:
         assert 'Content-Length' in prepared_request.headers
 
     def test_chunked_upload_does_not_set_content_length_header(self, httpbin):
-        """Ensure that requests with a generator body stream using
+        """Ensure that client_requests with a generator body stream using
         Transfer-Encoding: chunked, not a Content-Length header.
         """
         data = (i for i in [b'a', b'b', b'c'])
@@ -1944,7 +1944,7 @@ class TestRequests:
     def test_custom_redirect_mixin(self, httpbin):
         """Tests a custom mixin to overwrite ``get_redirect_target``.
 
-        Ensures a subclassed ``requests.Session`` can handle a certain type of
+        Ensures a subclassed ``client_requests.Session`` can handle a certain type of
         malformed redirect responses.
 
         1. original request receives a proper response: 302 redirect
@@ -2088,7 +2088,7 @@ class TestCaseInsensitiveDict:
     def test_lower_items(self):
         cid = CaseInsensitiveDict({
             'Accept': 'application/json',
-            'user-Agent': 'requests',
+            'user-Agent': 'client_requests',
         })
         keyset = frozenset(lowerkey for lowerkey, v in cid.lower_items())
         lowerkeyset = frozenset(['accept', 'user-agent'])
@@ -2097,7 +2097,7 @@ class TestCaseInsensitiveDict:
     def test_preserve_key_case(self):
         cid = CaseInsensitiveDict({
             'Accept': 'application/json',
-            'user-Agent': 'requests',
+            'user-Agent': 'client_requests',
         })
         keyset = frozenset(['Accept', 'user-Agent'])
         assert frozenset(i[0] for i in cid.items()) == keyset
@@ -2107,10 +2107,10 @@ class TestCaseInsensitiveDict:
     def test_preserve_last_key_case(self):
         cid = CaseInsensitiveDict({
             'Accept': 'application/json',
-            'user-Agent': 'requests',
+            'user-Agent': 'client_requests',
         })
         cid.update({'ACCEPT': 'application/json'})
-        cid['USER-AGENT'] = 'requests'
+        cid['USER-AGENT'] = 'client_requests'
         keyset = frozenset(['ACCEPT', 'USER-AGENT'])
         assert frozenset(i[0] for i in cid.items()) == keyset
         assert frozenset(cid.keys()) == keyset
@@ -2119,7 +2119,7 @@ class TestCaseInsensitiveDict:
     def test_copy(self):
         cid = CaseInsensitiveDict({
             'Accept': 'application/json',
-            'user-Agent': 'requests',
+            'user-Agent': 'client_requests',
         })
         cid_copy = cid.copy()
         assert cid == cid_copy

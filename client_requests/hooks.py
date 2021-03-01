@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-requests.hooks
+client_requests.hooks
 ~~~~~~~~~~~~~~
 
 This module provides the capabilities for the Requests hooks system.

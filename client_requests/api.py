@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-requests.api
+client_requests.api
 ~~~~~~~~~~~~
 
 This module implements the Requests API.
@@ -48,8 +48,8 @@ def request(method, url, **kwargs):
 
     Usage::
 
-      >>> import requests
-      >>> req = requests.request('GET', 'https://httpbin.org/get')
+      >>> import client_requests
+      >>> req = client_requests.request('GET', 'https://httpbin.org/get')
       >>> req
       <Response [200]>
     """

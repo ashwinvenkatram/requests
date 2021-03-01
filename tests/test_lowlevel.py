@@ -189,7 +189,7 @@ _proxy_combos += [(var.upper(), scheme) for var, scheme in _proxy_combos]
 @pytest.mark.parametrize("var,scheme", _proxy_combos)
 def test_use_proxy_from_environment(httpbin, var, scheme):
     url = "{}://httpbin.org".format(scheme)
-    fake_proxy = Server()  # do nothing with the requests; just close the socket
+    fake_proxy = Server()  # do nothing with the client_requests; just close the socket
     with fake_proxy as (host, port):
         proxy_url = "socks5://{}:{}".format(host, port)
         kwargs = {var: proxy_url}
@@ -268,7 +268,7 @@ def test_fragment_not_sent_with_request():
 def test_fragment_update_on_redirect():
     """Verify we only append previous fragment if one doesn't exist on new
     location. If a new fragment is encountered in a Location header, it should
-    be added to all subsequent requests.
+    be added to all subsequent client_requests.
     """
 
     def response_handler(sock):

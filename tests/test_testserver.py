@@ -77,7 +77,7 @@ class TestTestServer:
             block_server.set()  # release server block
 
     def test_multiple_requests(self):
-        """multiple requests can be served"""
+        """multiple client_requests can be served"""
         requests_to_handle = 5
 
         server = Server.basic_response_server(requests_to_handle=requests_to_handle)
@@ -94,7 +94,7 @@ class TestTestServer:
 
     @pytest.mark.skip(reason="this fails non-deterministically under pytest-xdist")
     def test_request_recovery(self):
-        """can check the requests content"""
+        """can check the client_requests content"""
         # TODO: figure out why this sometimes fails when using pytest-xdist.
         server = Server.basic_response_server(requests_to_handle=2)
         first_request = b'put your hands up in the air'
@@ -116,7 +116,7 @@ class TestTestServer:
         assert server.handler_results[1] == second_request
 
     def test_requests_after_timeout_are_not_received(self):
-        """the basic response handler times out when receiving requests"""
+        """the basic response handler times out when receiving client_requests"""
         server = Server.basic_response_server(request_timeout=1)
 
         with server as address:

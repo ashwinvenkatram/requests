@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-requests.certs
+client_requests.certs
 ~~~~~~~~~~~~~~
 
 This module returns the preferred default CA certificate bundle. There is

@@ -7,12 +7,12 @@ items.
 
 Example::
 
-    >>> import requests
-    >>> requests.codes['temporary_redirect']
+    >>> import client_requests
+    >>> client_requests.codes['temporary_redirect']
     307
-    >>> requests.codes.teapot
+    >>> client_requests.codes.teapot
     418
-    >>> requests.codes['\o/']
+    >>> client_requests.codes['\o/']
     200
 
 Some codes have multiple names, and both upper- and lower-case versions of

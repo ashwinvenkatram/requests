@@ -126,8 +126,8 @@ html_theme = "alabaster"
 # documentation.
 html_theme_options = {
     "show_powered_by": False,
-    "github_user": "requests",
-    "github_repo": "requests",
+    "github_user": "client_requests",
+    "github_repo": "client_requests",
     "github_banner": True,
     "show_related": False,
     "note_bg": "#FFF59C",
@@ -275,7 +275,7 @@ latex_documents = [
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [(master_doc, "requests", u"Requests Documentation", [author], 1)]
+man_pages = [(master_doc, "client_requests", u"Requests Documentation", [author], 1)]
 
 # If true, show URL addresses after external links.
 # man_show_urls = False

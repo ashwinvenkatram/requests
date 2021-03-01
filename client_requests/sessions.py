@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
 """
-requests.sessions
+client_requests.sessions
 ~~~~~~~~~~~~~~~~~
 
 This module provides a Session object to manage and persist settings across
-requests (cookies, auth, proxies).
+client_requests (cookies, auth, proxies).
 """
 import os
 import sys
@@ -79,7 +79,7 @@ def merge_setting(request_setting, session_setting, dict_class=OrderedDict):
 
 
 def merge_hooks(request_hooks, session_hooks, dict_class=OrderedDict):
-    """Properly merges both requests and session hooks.
+    """Properly merges both client_requests and session hooks.
 
     This is necessary because when request_hooks == {'response': []}, the
     merge breaks Session hooks entirely.
@@ -97,7 +97,7 @@ class SessionRedirectMixin(object):
 
     def get_redirect_target(self, resp):
         """Receives a Response. Returns a redirect URI or ``None``"""
-        # Due to the nature of how requests processes redirects this method will
+        # Due to the nature of how client_requests processes redirects this method will
         # be called at least once upon the original response and at least twice
         # on each subsequent redirect response (if any).
         # If a custom mixin is used to handle this logic, it may be advantageous
@@ -124,7 +124,7 @@ class SessionRedirectMixin(object):
             return True
         # Special case: allow http -> https redirect when using the standard
         # ports. This isn't specified by RFC 7235, but is kept to avoid
-        # breaking backwards compatibility with older versions of requests
+        # breaking backwards compatibility with older versions of client_requests
         # that allowed any redirects on the same host.
         if (old_parsed.scheme == 'http' and old_parsed.port in (80, None)
                 and new_parsed.scheme == 'https' and new_parsed.port in (443, None)):
@@ -341,14 +341,14 @@ class Session(SessionRedirectMixin):
 
     Basic Usage::
 
-      >>> import requests
-      >>> s = requests.Session()
+      >>> import client_requests
+      >>> s = client_requests.Session()
       >>> s.get('https://httpbin.org/get')
       <Response [200]>
 
     Or as a context manager::
 
-      >>> with requests.Session() as s:
+      >>> with client_requests.Session() as s:
       ...     s.get('https://httpbin.org/get')
       <Response [200]>
     """
@@ -387,9 +387,9 @@ class Session(SessionRedirectMixin):
         self.stream = False
 
         #: SSL Verification default.
-        #: Defaults to `True`, requiring requests to verify the TLS certificate at the
+        #: Defaults to `True`, requiring client_requests to verify the TLS certificate at the
         #: remote end.
-        #: If verify is set to `False`, requests will accept any TLS certificate
+        #: If verify is set to `False`, client_requests will accept any TLS certificate
         #: presented by the server, and will ignore hostname mismatches and/or
         #: expired certificates, which will make your application vulnerable to
         #: man-in-the-middle (MitM) attacks.
@@ -402,7 +402,7 @@ class Session(SessionRedirectMixin):
 
         #: Maximum number of redirects allowed. If the request exceeds this
         #: limit, a :class:`TooManyRedirects` exception is raised.
-        #: This defaults to requests.models.DEFAULT_REDIRECT_LIMIT, which is
+        #: This defaults to client_requests.models.DEFAULT_REDIRECT_LIMIT, which is
         #: 30.
         self.max_redirects = DEFAULT_REDIRECT_LIMIT
 
@@ -412,7 +412,7 @@ class Session(SessionRedirectMixin):
 
         #: A CookieJar containing all currently outstanding cookies set on this
         #: session. By default it is a
-        #: :class:`RequestsCookieJar <requests.cookies.RequestsCookieJar>`, but
+        #: :class:`RequestsCookieJar <client_requests.cookies.RequestsCookieJar>`, but
         #: may be any other ``cookielib.CookieJar`` compatible object.
         self.cookies = cookiejar_from_dict({})
 
@@ -503,7 +503,7 @@ class Session(SessionRedirectMixin):
         :param verify: (optional) Either a boolean, in which case it controls whether we verify
             the server's TLS certificate, or a string, in which case it must be a path
             to a CA bundle to use. Defaults to ``True``. When set to
-            ``False``, requests will accept any TLS certificate presented by
+            ``False``, client_requests will accept any TLS certificate presented by
             the server, and will ignore hostname mismatches and/or expired
             certificates, which will make your application vulnerable to
             man-in-the-middle (MitM) attacks. Setting verify to ``False`` 
@@ -712,7 +712,7 @@ class Session(SessionRedirectMixin):
             for (k, v) in env_proxies.items():
                 proxies.setdefault(k, v)
 
-            # Look for requests environment configuration and be compatible
+            # Look for client_requests environment configuration and be compatible
             # with cURL.
             if verify is True or verify is None:
                 verify = (os.environ.get('REQUESTS_CA_BUNDLE') or
@@ -731,7 +731,7 @@ class Session(SessionRedirectMixin):
         """
         Returns the appropriate connection adapter for the given URL.
 
-        :rtype: requests.adapters.BaseAdapter
+        :rtype: client_requests.adapters.BaseAdapter
         """
         for (prefix, adapter) in self.adapters.items():
 
@@ -773,7 +773,7 @@ def session():
     .. deprecated:: 1.0.0
 
         This method has been deprecated since version 1.0.0 and is only kept for
-        backwards compatibility. New code should use :class:`~requests.sessions.Session`
+        backwards compatibility. New code should use :class:`~client_requests.sessions.Session`
         to create a session. This may be removed at a future date.
 
     :rtype: Session

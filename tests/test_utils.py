@@ -185,7 +185,7 @@ class TestGetEnvironProxies:
             'http://www.requests.com/',
         ))
     def test_bypass_no_proxy_keyword(self, url):
-        no_proxy = '192.168.1.1,requests.com'
+        no_proxy = '192.168.1.1,client_requests.com'
         assert get_environ_proxies(url, no_proxy=no_proxy) == {}
 
     @pytest.mark.parametrize(
@@ -200,7 +200,7 @@ class TestGetEnvironProxies:
         # This is testing that the 'no_proxy' argument overrides the
         # environment variable 'no_proxy'
         monkeypatch.setenv('http_proxy', 'http://proxy.example.com:3128/')
-        no_proxy = '192.168.1.1,requests.com'
+        no_proxy = '192.168.1.1,client_requests.com'
         assert get_environ_proxies(url, no_proxy=no_proxy) != {}
 
 
@@ -649,7 +649,7 @@ def test_should_bypass_proxies_pass_only_hostname(url, expected, mocker):
     """The proxy_bypass function should be called with a hostname or IP without
     a port number or auth credentials.
     """
-    proxy_bypass = mocker.patch('requests.utils.proxy_bypass')
+    proxy_bypass = mocker.patch('client_requests.utils.proxy_bypass')
     should_bypass_proxies(url, no_proxy=None)
     proxy_bypass.assert_called_once_with(expected)
 

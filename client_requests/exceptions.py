@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-requests.exceptions
+client_requests.exceptions
 ~~~~~~~~~~~~~~~~~~~
 
 This module contains the set of Requests' exceptions.
@@ -45,8 +45,8 @@ class Timeout(RequestException):
     """The request timed out.
 
     Catching this error will catch both
-    :exc:`~requests.exceptions.ConnectTimeout` and
-    :exc:`~requests.exceptions.ReadTimeout` errors.
+    :exc:`~client_requests.exceptions.ConnectTimeout` and
+    :exc:`~client_requests.exceptions.ReadTimeout` errors.
     """
 
 

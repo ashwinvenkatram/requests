@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-requests.compat
+client_requests.compat
 ~~~~~~~~~~~~~~~
 
 This module handles import compatibility issues between Python 2 and

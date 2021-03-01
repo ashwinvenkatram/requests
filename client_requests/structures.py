@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-requests.structures
+client_requests.structures
 ~~~~~~~~~~~~~~~~~~~
 
 Data structures that power Requests.

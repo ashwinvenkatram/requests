@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-requests.models
+client_requests.models
 ~~~~~~~~~~~~~~~
 
 This module contains the primary objects that power Requests.
@@ -217,8 +217,8 @@ class Request(RequestHooksMixin):
 
     Usage::
 
-      >>> import requests
-      >>> req = requests.Request('GET', 'https://httpbin.org/get')
+      >>> import client_requests
+      >>> req = client_requests.Request('GET', 'https://httpbin.org/get')
       >>> req.prepare()
       <PreparedRequest [GET]>
     """
@@ -279,13 +279,13 @@ class PreparedRequest(RequestEncodingMixin, RequestHooksMixin):
 
     Usage::
 
-      >>> import requests
-      >>> req = requests.Request('GET', 'https://httpbin.org/get')
+      >>> import client_requests
+      >>> req = client_requests.Request('GET', 'https://httpbin.org/get')
       >>> r = req.prepare()
       >>> r
       <PreparedRequest [GET]>
 
-      >>> s = requests.Session()
+      >>> s = client_requests.Session()
       >>> s.send(r)
       <Response [200]>
     """

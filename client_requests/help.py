@@ -104,7 +104,7 @@ def info():
         'chardet': chardet_info,
         'cryptography': cryptography_info,
         'idna': idna_info,
-        'requests': {
+        'client_requests': {
             'version': requests_version,
         },
     }

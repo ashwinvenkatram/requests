@@ -39,7 +39,7 @@ if sys.argv[-1] == 'publish':
     os.system('twine upload dist/*')
     sys.exit()
 
-packages = ['requests']
+packages = ['client_requests']
 
 requires = [
     'chardet>=3.0.2,<5',
@@ -58,7 +58,7 @@ test_requirements = [
 ]
 
 about = {}
-with open(os.path.join(here, 'requests', '__version__.py'), 'r', 'utf-8') as f:
+with open(os.path.join(here, 'client_requests', '__version__.py'), 'r', 'utf-8') as f:
     exec(f.read(), about)
 
 with open('README.md', 'r', 'utf-8') as f:
@@ -75,7 +75,7 @@ setup(
     url=about['__url__'],
     packages=packages,
     package_data={'': ['LICENSE', 'NOTICE']},
-    package_dir={'requests': 'requests'},
+    package_dir={'client_requests': 'client_requests'},
     include_package_data=True,
     python_requires=">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*",
     install_requires=requires,

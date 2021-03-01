@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-requests.utils
+client_requests.utils
 ~~~~~~~~~~~~~~
 
 This module provides utility functions that are used within Requests
@@ -143,7 +143,7 @@ def super_len(o):
             # This can happen in some weird situations, such as when the file
             # is actually a special file descriptor like stdin. In this
             # instance, we don't know what the length is, so set it to zero and
-            # let requests chunk it instead.
+            # let client_requests chunk it instead.
             if total_length is not None:
                 current_position = total_length
         else:
@@ -444,7 +444,7 @@ def get_encodings_from_content(content):
     :param content: bytestring to extract encodings from.
     """
     warnings.warn((
-        'In requests 3.0, get_encodings_from_content will be removed. For '
+        'In client_requests 3.0, get_encodings_from_content will be removed. For '
         'more information, please see the discussion on issue #2266. (This'
         ' warning should only appear once.)'),
         DeprecationWarning)
@@ -549,7 +549,7 @@ def get_unicode_from_response(r):
     :rtype: str
     """
     warnings.warn((
-        'In requests 3.0, get_unicode_from_response will be removed. For '
+        'In client_requests 3.0, get_unicode_from_response will be removed. For '
         'more information, please see the discussion on issue #2266. (This'
         ' warning should only appear once.)'),
         DeprecationWarning)
@@ -805,7 +805,7 @@ def select_proxy(url, proxies):
     return proxy
 
 
-def default_user_agent(name="python-requests"):
+def default_user_agent(name="python-client_requests"):
     """
     Return a string representing the default user agent.
 
@@ -816,7 +816,7 @@ def default_user_agent(name="python-requests"):
 
 def default_headers():
     """
-    :rtype: requests.structures.CaseInsensitiveDict
+    :rtype: client_requests.structures.CaseInsensitiveDict
     """
     return CaseInsensitiveDict({
         'User-Agent': default_user_agent(),
